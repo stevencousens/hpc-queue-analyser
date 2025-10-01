@@ -1,0 +1,50 @@
+# HPC Queue Analyser Config
+# Defines analysis groups that give views of cluster queue/capacity.
+# Each analysis group is given its own tab in the user interface
+# Each group must include:
+#   - name: unique identifier
+#   - criteria: keys like partitions, users, nodes, gpu_types
+# Valid keys: partitions, users, nodes, gpu_types,
+#             custom_queue_mask, custom_capacity_mask
+# Used by: config_loader.py (load_yaml, validate_cfg)
+
+
+analysis_groups:
+
+  - name: Cluster
+    criteria:
+        partitions: "*"
+        users: "*"
+        nodes: "*"
+  
+  - name: CPU Partitions
+    criteria:
+      partitions: ["k2-epsrc", "k2-hipri", "k2-medpri", "k2-lowpri"]
+
+  - name: High Mem Partitions
+    criteria:
+      partitions: ["k2-epsrc-himem", "k2-himem"]
+  
+  - name: V100
+    criteria:
+        gpu_types: ["v100"]
+
+  - name: A100
+    criteria:
+        gpu_types: ["a100"]
+
+  - name: MIG Slices
+    criteria:
+        gpu_types: ["2g.20gb", "3g.40gb"]
+
+  - name: H100
+    criteria:
+        gpu_types: ["h100"]
+
+  - name: I1100
+    criteria:
+        gpu_types: ["i1100"]
+
+  - name: MI300X
+    criteria:
+        gpu_types: ["mi300x"]
